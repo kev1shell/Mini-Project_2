@@ -7,7 +7,7 @@
 //
 
 //handel the new challenge
-
+insertNewEmployee($_POST);
 //go back to index
 header('Location: index.php');
 ?>

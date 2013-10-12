@@ -1,12 +1,10 @@
 <?php
 
-//header.php
+//login.php
 //
 //Author: Kevin Shell
-//Date  : 10/11/2013
+//Date  : 10/12/2013
 //
-
-
 ?>
 <!DOCTYPE html>
 <html>
@@ -24,19 +22,14 @@
     
 </div>
     
-<div id="login" style="clear:both;text-align: center;">
-    <?php if(isset($_SESSION['user_name'])) if($_SESSION['user_name']==""){?>
-    <a href="login.php">Login</a>
-    <?php } ?>
-    <?php if(isset($_SESSION['user_name'])) if($_SESSION['user_name']!=""){?>
-    Logged in as: <?php echo $_SESSION['user_name']." "?> <a href="logout.php">Logout</a>
-    <?php }?>
-</div>
-
-<?php //<div id="content" style="background-color:#FFFFFF;height:220px;width:1000px;"></div>?>
-
+<form action = "login_user.php" method="post">
+    User Name: <input name="user_name" type="text" />
+    <input name="submit" type="submit" value="Login"/>
+</form>
 
 </div>
  
 </body>
 </html>
+
+<?php include './footer.php';?>

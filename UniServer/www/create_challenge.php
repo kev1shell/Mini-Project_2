@@ -13,11 +13,11 @@ include './header.php';
 ?>
 
 <form action = "send_challenge.php" method="post">
-    First Name: <input name="To" type="text" /> </br>
-    Last Name: <input name="From" type="text" /> </br>
-    Birthday: <input name="Time" type="text" /> </br>
-    Email: <input name="Date" type="DATE" /> </br>
-    Email: <input name="Place" type="text" /> </br>
+    To: <input name="To" type="text" /> </br>
+    From: <input name="From" type="text" /> </br>
+    Time: <input name="TIME" type="TIME" /> </br>
+    Date: <input name="DATE" type="DATE" /> </br>
+    Place: <input name="Place" type="text" /> </br>
     <input name="submit" type="submit" value="Submit"/>
 </form>
 
