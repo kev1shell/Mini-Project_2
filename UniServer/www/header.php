@@ -20,7 +20,6 @@ session_start();
 
 <a href="index.php">Home</a>
 <a href="create_challenge.php">Challenge</a>
-<a href="reschedule_challenge.php">Reschedule</a>
     
 </div>
     
