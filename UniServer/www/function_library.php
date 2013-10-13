@@ -25,20 +25,32 @@ function connectToDatabase(){
         }
 }
 
-function insert_new_challenge($data){
+function insert_new_challenge($data,$target_user){
+    //inserts a new challenge stored in $data to the message table for $target_user
+    //if $target_user does not exist. function returns -1.
+    $user_id = get_user_id($target_user);
+    
+    if($user_id == -1){
+        if(debugging()) echo '$target user does not exist';
+        return -1;
+    }
+    
     $dbCon = connectToDatabase();
         
-    $From = $data['From'];
-    $To = $data['To'];
+    $source_user = $data['source_user'];
+    $target_user = $data['target_user'];
     $TIME = $data['TIME'];
     $DATE = $data['DATE'];
     $Place=$data['Place'];
+    $msg_code=$data['msg_code'];
+    
         
-    $sql = "INSERT INTO message_table_00 (From, To, TIME, DATE, Place)
-            VALUES ('$From', '$To', '$TIME', '$DATE', '$Place')";
+    $sql = "INSERT INTO message_table_" . $user_id . " (source_user, target_user, TIME, DATE, Place, msg_code)
+            VALUES ('$source_user', '$target_user', '$TIME', '$DATE', '$Place', '$msg_code')";
     $dbCon->query($sql);
        
     if($dbCon->connect_errno > 0) echo "Connection error";
+    if(debugging()) echo 'Challenge inserted. ';
 }
 
 function get_users_table(){
@@ -89,7 +101,10 @@ function get_user_id($user_name){
 function get_challenges(){
     $dbcon = connectToDatabase();
     
-    $sql = "SELECT * FROM message_table_00";
+    session_start();
+    $user_id = $_SESSION['user_id'];
+    
+    $sql = "SELECT * FROM message_table_".$user_id;
     $result = $dbcon->query($sql);
     
     if(!$result){
@@ -101,12 +116,13 @@ function get_challenges(){
     $r=0;
     $table=array(array());
     while ($row = $result->fetch_assoc()) {
-    	$table[$r][0] = $row['From'];
-    	$table[$r][1] = $row['To'];
+    	$table[$r][0] = $row['source_user'];
+    	$table[$r][1] = $row['target_user'];
 	$table[$r][2] = $row['TIME'];
 	$table[$r][3] = $row['DATE'];
         $table[$r][4] = $row['Place'];
         $table[$r][5] = $row['msg_code'];
+        $table[$r][6] = $row['id'];
         $r++;
     }
     $result->close(); 
@@ -122,4 +138,5 @@ function display_challenges(){
     
     if(debugging())echo 'included display_challenges.php ... ';
 }
+
 ?>

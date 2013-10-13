@@ -6,7 +6,7 @@
 //Date  : 10/11/2013
 //
 
-
+session_start();
 ?>
 <!DOCTYPE html>
 <html>
